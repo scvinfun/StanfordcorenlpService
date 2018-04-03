@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RestController;
 public class WebAppInterface {
     @PostMapping("stanfordcorenlpService")
     public boolean stanfordcorenlpService(@RequestParam("text") String text, @RequestParam("keyPhrase") String keyPhrase) {
-        return (!StanforecorenlpController.getInstance().isSelfSubject(text, keyPhrase) || StanforecorenlpController.getInstance().isQuotationSentence(text));
+        StanforecorenlpController sc = StanforecorenlpController.getInstance();
+        return (!sc.isSelfSubject(text, keyPhrase) || sc.isQuotationSentence(text));
     }
 }
