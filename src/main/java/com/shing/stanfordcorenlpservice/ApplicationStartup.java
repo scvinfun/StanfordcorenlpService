@@ -8,7 +8,8 @@ import org.springframework.stereotype.Component;
 public class ApplicationStartup implements ApplicationListener<ApplicationReadyEvent> {
     @Override
     public void onApplicationEvent(final ApplicationReadyEvent event) {
-        StanforecorenlpController.getInstance().initStanforecorenlp(true);
+        StanforecorenlpController.setActive(true);
+        StanforecorenlpController.getInstance().initStanforecorenlp();
 
         return;
     }

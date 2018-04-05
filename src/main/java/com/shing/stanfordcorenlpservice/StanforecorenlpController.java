@@ -17,6 +17,7 @@ public class StanforecorenlpController {
     private static StanfordCoreNLP pipeline = null;
     private static String dummy_origin_text;
     private static String dummyKeyPhrase;
+    private static boolean active = false;
 
     public static StanforecorenlpController getInstance() {
         if (instance == null) {
@@ -30,8 +31,8 @@ public class StanforecorenlpController {
         dummyKeyPhrase = "dummy";
     }
 
-    public void initStanforecorenlp(boolean decision) {
-        if (decision) {
+    public void initStanforecorenlp() {
+        if (StanforecorenlpController.isActive()) {
             System.out.println("==========  START  ==========");
             isSelfSubject(dummy_origin_text, dummyKeyPhrase);
             isQuotationSentence(dummy_origin_text);
@@ -87,5 +88,13 @@ public class StanforecorenlpController {
                 if (q.hasSpeaker && !q.speaker().get().equalsIgnoreCase("I"))
                     return true;
         return false;
+    }
+
+    public static boolean isActive() {
+        return active;
+    }
+
+    public static void setActive(boolean active) {
+        StanforecorenlpController.active = active;
     }
 }
